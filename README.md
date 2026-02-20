@@ -70,6 +70,9 @@ npm install
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=your_unsigned_preset
+
 # Telegram (Optional - for order notifications)
 TELEGRAM_BOT_TOKEN=your_telegram_bot_token
 TELEGRAM_CHAT_ID=your_telegram_chat_id
@@ -109,13 +112,11 @@ Access the admin dashboard at `/admin`
 To receive order notifications via Telegram:
 
 1. Create a Telegram bot:
-
    - Message [@BotFather](https://t.me/botfather) on Telegram
    - Send `/newbot` and follow the instructions
    - Save the bot token
 
 2. Get your chat ID:
-
    - Message your bot
    - Visit `https://api.telegram.org/bot<YOUR_BOT_TOKEN>/getUpdates`
    - Find your `chat_id` in the response
