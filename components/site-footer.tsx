@@ -43,8 +43,12 @@ export function SiteFooter() {
             <ul className='space-y-2 text-sm'>
               {shop.map((item) => (
                 <li key={item.label}>
-                  <Link href={item.link} className='text-muted-foreground hover:text-foreground transition-colors'>
-                    {item.label}
+                  <Link
+                    href={item.link}
+                    className='text-muted-foreground group hover:text-foreground flex items-center gap-1 transition-colors'
+                  >
+                    <div className='bg-primary flex h-[1] w-0 items-center transition-all duration-300 ease-in-out group-hover:w-4' />
+                    <span className='hidden sm:inline'>{item.label}</span>
                   </Link>
                 </li>
               ))}
@@ -57,8 +61,12 @@ export function SiteFooter() {
             <ul className='space-y-2 text-sm'>
               {support.map((item) => (
                 <li key={item.label}>
-                  <Link href={item.link} className='text-muted-foreground hover:text-foreground transition-colors'>
-                    {item.label}
+                  <Link
+                    href={item.link}
+                    className='text-muted-foreground group hover:text-foreground flex items-center gap-1 transition-colors'
+                  >
+                    <div className='bg-primary flex h-[1] w-0 items-center transition-all duration-300 ease-in-out group-hover:w-4' />
+                    <span className='hidden sm:inline'>{item.label}</span>
                   </Link>
                 </li>
               ))}
@@ -68,14 +76,14 @@ export function SiteFooter() {
           {/* Connect */}
           <div>
             <h3 className='mb-4 font-semibold'>Connect</h3>
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-6'>
               {contact.map((item) => (
                 <Link
                   key={item.label}
                   href={item.href}
                   className='text-muted-foreground hover:text-foreground inline-flex items-center gap-3 transition-colors'
                 >
-                  <Icon name={item.icon} size={25} />
+                  <Icon name={item.icon} size={20} />
                   <span className='hidden text-sm sm:inline'>{item.label}</span>
                 </Link>
               ))}

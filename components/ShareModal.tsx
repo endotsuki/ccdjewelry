@@ -62,7 +62,7 @@ export function ShareModal({ url, open, onOpenChange }: ShareModalProps) {
                 aria-label={button.label}
                 className='inline-flex items-center justify-center transition-all duration-300 hover:scale-110'
               >
-                <Icon name={button.icon} size={30} />
+                <Icon name={button.icon} size={30} className='transition-all duration-500 ease-in-out hover:scale-110' />
               </a>
             ))}
           </div>

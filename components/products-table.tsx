@@ -20,13 +20,7 @@ import type { Product } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 import { sizedImage } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
-import {
-  ArrowUpRight01Icon,
-  TaskEdit01Icon,
-  ImageCompositionOvalIcon,
-  ShoppingBasketAdd03Icon,
-  Delete01Icon,
-} from '@hugeicons/core-free-icons';
+import { ArrowUpRight01Icon, Edit04Icon, Image03Icon, ShoppingBasketAdd03Icon, Delete01Icon } from '@hugeicons/core-free-icons';
 
 interface ProductsTableProps {
   products: Product[];
@@ -214,7 +208,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
                         </Link>
                       </Button>
                       <Button variant='outline' size='icon' onClick={() => openDialog(p, false)} className='h-9 w-9'>
-                        <HugeiconsIcon size={20} icon={TaskEdit01Icon} />
+                        <HugeiconsIcon size={20} icon={Edit04Icon} />
                       </Button>
                       <Button
                         variant={slideshow[p.id] ? 'default' : 'outline'}
@@ -223,7 +217,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
                         className='h-9 w-9'
                         aria-label={slideshow[p.id] ? 'Remove from slideshow' : 'Add to slideshow'}
                       >
-                        <HugeiconsIcon size={20} icon={ImageCompositionOvalIcon} />
+                        <HugeiconsIcon size={20} icon={Image03Icon} />
                       </Button>
                       <Button
                         variant='destructive'
