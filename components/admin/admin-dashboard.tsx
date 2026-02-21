@@ -5,10 +5,12 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { OrdersTable } from '@/components/orders-table';
-import { ProductsTable } from '@/components/products/products-table';
+import { OrdersTable } from '@/components/admin/orders-table';
+import { ProductsTable } from '@/components/admin/products-table';
+import { CategoryTable } from '@/components/admin/category-table';
 import { AdminSearch } from '@/components/admin/admin-search';
 import type { Order, Product } from '@/lib/types';
+import type { Category } from '@/components/admin/category-table';
 import { AnimatedThemeToggler } from '@/components/animated-theme-toggler';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
@@ -23,11 +25,14 @@ import {
 interface AdminDashboardProps {
   orders: Order[];
   products: Product[];
+  categories: Category[];
   totalOrders: number;
   totalProducts: number;
 }
 
-export function AdminDashboard({ orders, products, totalOrders, totalProducts }: AdminDashboardProps) {
+type ActiveTab = 'orders' | 'products' | 'categories';
+
+export function AdminDashboard({ orders, products, categories, totalOrders, totalProducts }: AdminDashboardProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -43,17 +48,18 @@ export function AdminDashboard({ orders, products, totalOrders, totalProducts }:
     router.refresh();
   };
 
-  const [activeTab, setActiveTab] = useState<'orders' | 'products'>('orders');
+  const [activeTab, setActiveTab] = useState<ActiveTab>('orders');
   const [query, setQuery] = useState('');
+
   useEffect(() => {
     const savedTab = localStorage.getItem('admin-active-tab');
-    if (savedTab === 'orders' || savedTab === 'products') {
+    if (savedTab === 'orders' || savedTab === 'products' || savedTab === 'categories') {
       setActiveTab(savedTab);
     }
   }, []);
 
   const handleTabChange = (value: string) => {
-    if (value === 'orders' || value === 'products') {
+    if (value === 'orders' || value === 'products' || value === 'categories') {
       setActiveTab(value);
       localStorage.setItem('admin-active-tab', value);
     }
@@ -63,6 +69,7 @@ export function AdminDashboard({ orders, products, totalOrders, totalProducts }:
   const pendingOrders = orders.filter((order) => order.status === 'pending').length;
 
   const q = query.trim().toLowerCase();
+
   const filteredOrders = q
     ? orders.filter((o) =>
         [o.order_number, o.customer_name, o.customer_email, o.customer_phone].some((f) =>
@@ -82,6 +89,16 @@ export function AdminDashboard({ orders, products, totalOrders, totalProducts }:
         )
       )
     : products;
+
+  const filteredCategories = q
+    ? categories.filter((c) =>
+        [c.name, c.slug, c.description].some((f) =>
+          String(f || '')
+            .toLowerCase()
+            .includes(q)
+        )
+      )
+    : categories;
 
   return (
     <div className='flex min-h-screen flex-col'>
@@ -158,7 +175,7 @@ export function AdminDashboard({ orders, products, totalOrders, totalProducts }:
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className='w-full'>
-          <TabsList className='bg-muted/50 mb-6'>
+          <TabsList className='bg-muted/50 mb-6 gap-2'>
             <TabsTrigger
               value='orders'
               id='tab-orders'
@@ -174,6 +191,14 @@ export function AdminDashboard({ orders, products, totalOrders, totalProducts }:
               className='data-[state=active]:bg-background data-[state=active]:shadow-sm'
             >
               Products
+            </TabsTrigger>
+            <TabsTrigger
+              value='categories'
+              id='tab-categories'
+              aria-controls='tab-categories-content'
+              className='data-[state=active]:bg-background data-[state=active]:shadow-sm'
+            >
+              Categories
             </TabsTrigger>
           </TabsList>
 
@@ -198,6 +223,17 @@ export function AdminDashboard({ orders, products, totalOrders, totalProducts }:
               </CardHeader>
               <CardContent>
                 <ProductsTable products={filteredProducts} />
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value='categories' className='mt-6'>
+            <Card className='py-5'>
+              <CardHeader>
+                <CardTitle>Categories</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CategoryTable categories={filteredCategories} />
               </CardContent>
             </Card>
           </TabsContent>
