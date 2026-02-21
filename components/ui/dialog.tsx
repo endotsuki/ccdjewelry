@@ -68,7 +68,7 @@ function DialogContent({ className, children, showCloseButton = true, ...props }
         {children}
         {showCloseButton && (
           <DialogClosePrimitive className='data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 disabled:pointer-events-none'>
-            <Button variant='blocked' className='group rounded-md p-0' size='icon'>
+            <Button variant='destructive' className='group rounded-md p-0' size='icon'>
               <HugeiconsIcon size={20} icon={Cancel01Icon} className='transition-all duration-300 group-hover:rotate-90' />
               <span className='sr-only'>Close</span>
             </Button>

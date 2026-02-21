@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/site-header';
 import { SiteFooter } from '@/components/site-footer';
-import { ProductDetails } from '@/components/product-details';
 import { createClient } from '@/lib/supabase/server';
 import type { Metadata } from 'next';
+import { ProductDetails } from '@/components/products/product-details';
 
 export const runtime = 'edge';
 

@@ -9,7 +9,7 @@ import type { Product } from '@/lib/types';
 import { sizedImage } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft01Icon, ArrowRight01Icon } from '@hugeicons/core-free-icons';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 
 interface ProductRowProps {
   title: string;

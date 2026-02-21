@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from './search-bar';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useRouter } from 'next/navigation';
 import { AnimatedThemeToggler } from './animated-theme-toggler';
@@ -33,7 +33,6 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
   const router = useRouter();
   const [recentOrderId, setRecentOrderId] = useState<string | null>(null);
 
-  // If parent doesn't provide cartCount, read from client cart hook
   const { cartItems } = useCartData();
   const displayCartCount = typeof cartCount === 'number' && cartCount > 0 ? cartCount : cartItems?.length || 0;
 
@@ -60,8 +59,10 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? `border border-black/5 shadow-lg shadow-black/40 backdrop-blur-md dark:border-white/10` : `bg-white dark:bg-transparent`
+      className={`fixed inset-x-0 top-0 z-50 bg-white transition-all duration-300 dark:bg-zinc-900 ${
+        scrolled
+          ? 'border-b border-black/5 shadow-md shadow-black/10 dark:border-white/10 dark:shadow-black/40'
+          : 'border-b border-transparent'
       } md:inset-x-4 md:top-4 md:rounded-2xl lg:inset-x-20 xl:inset-x-40`}
     >
       <div className='container mx-auto px-4 sm:px-6'>
@@ -77,7 +78,7 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className='text-foreground/70 hover:text-foreground group relative text-sm font-medium transition-colors dark:text-gray-300 dark:hover:text-white'
+                className='relative text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white'
               >
                 <p className='flex items-center gap-1.5 text-base'>
                   <HugeiconsIcon size={20} icon={item.icon} />
@@ -109,7 +110,7 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
                 className='relative hidden h-9 w-9 sm:flex'
               >
                 <HugeiconsIcon size={20} icon={PackageProcessIcon} />
-                <Badge className='fixed -top-1 -right-1 h-3 w-3 items-center justify-center rounded-full bg-blue-500 p-0' />
+                <Badge className='absolute -top-1 -right-1 h-3 w-3 items-center justify-center rounded-full bg-blue-500 p-0' />
               </Button>
             )}
 
@@ -132,7 +133,10 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
                   <HugeiconsIcon size={20} icon={Menu01Icon} />
                 </Button>
               </SheetTrigger>
-              <SheetContent side='right' className='w-72 p-6 sm:w-[320px]'>
+              <SheetContent
+                side='right'
+                className='w-72 border-l border-black/5 bg-white p-6 sm:w-[320px] dark:border-white/10 dark:bg-zinc-900'
+              >
                 <VisuallyHidden>
                   <SheetTitle>Menu</SheetTitle>
                 </VisuallyHidden>
@@ -148,7 +152,9 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
                       key={item.name}
                       href={item.href}
                       className={`flex items-center gap-3 py-2 text-base font-medium transition-colors ${
-                        pathname === item.href ? 'text-primary' : 'text-foreground/70 hover:text-primary dark:text-gray-200'
+                        pathname === item.href
+                          ? 'text-primary'
+                          : 'hover:text-primary text-zinc-600 dark:text-zinc-300 dark:hover:text-white'
                       }`}
                     >
                       <HugeiconsIcon size={20} icon={item.icon} />
@@ -156,11 +162,10 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
                     </Link>
                   ))}
 
-                  {/* Mobile Recent Order Link */}
                   {recentOrderId && (
                     <Link
                       href={`/orders/${recentOrderId}`}
-                      className='text-foreground/70 hover:text-primary flex items-center gap-3 py-2 text-base font-medium transition-colors sm:hidden dark:text-gray-200'
+                      className='hover:text-primary flex items-center gap-3 py-2 text-base font-medium text-zinc-600 transition-colors sm:hidden dark:text-zinc-300 dark:hover:text-white'
                     >
                       <HugeiconsIcon size={20} icon={PackageProcessIcon} />
                       Recent Order

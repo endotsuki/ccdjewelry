@@ -10,9 +10,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import type { Product } from '@/lib/types';
-import { ImagePreview } from './image-preview';
 import { fixImageOrientation } from '@/lib/image-utils';
 import { useProductForm } from '@/hooks/useProductForm';
+import { ImagePreview } from '../image-preview';
 
 interface ProductDialogProps {
   product: Product | null;
@@ -200,8 +200,10 @@ export function ProductDialog({ product, open, onOpenChange, isPreviewMode = fal
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='scrollbar-hide max-h-[90vh] max-w-2xl overflow-y-auto'>
         <DialogHeader>
-          <DialogTitle>{product ? 'Edit Product' : 'Add New Product'}</DialogTitle>
-          <DialogDescription>{product ? 'Update product information' : 'Create a new product for your store'}</DialogDescription>
+          <DialogTitle>{isPreviewMode ? 'Product Details' : product ? 'Edit Product' : 'Add New Product'}</DialogTitle>
+          <DialogDescription>
+            {isPreviewMode ? 'Viewing product information' : product ? 'Update product information' : 'Create a new product for your store'}
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className='space-y-4'>

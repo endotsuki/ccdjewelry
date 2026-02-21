@@ -10,12 +10,12 @@ import { Separator } from '@/components/ui/separator';
 import type { Product } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
-import { ShareModal } from './ShareModal';
-import { ProductRow } from '@/components/ProductRow';
 import { sizedImage } from '@/lib/utils';
-import { QuantitySelector } from './QuantitySelector';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft01Icon, ArrowRight01Icon, FavouriteIcon, Share08Icon, ShoppingCartAdd02Icon, StarIcon } from '@hugeicons/core-free-icons';
+import { QuantitySelector } from '../quantity-selector';
+import { ShareModal } from '../share-modal';
+import { ProductRow } from './product-row';
 
 interface ProductDetailsProps {
   product: Product & { category?: { name: string; id: string; slug: string } };

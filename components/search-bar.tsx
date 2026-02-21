@@ -55,12 +55,17 @@ export function SearchBar() {
 
   return (
     <div className='relative w-full max-w-md' ref={ref}>
-      <div className={`relative flex items-center transition-all ${focused ? 'ring-primary/20 rounded-2xl ring-2' : ''}`}>
+      {/* Search Input Wrapper — solid bg + visible border in both modes */}
+      <div
+        className={`relative flex items-center rounded-2xl border border-zinc-200 bg-zinc-100 transition-all dark:border-white/20 dark:bg-white/10 ${
+          focused ? 'ring-primary/30 border-primary/50 dark:border-primary/50 ring-2' : 'hover:border-zinc-300 dark:hover:border-white/30'
+        }`}
+      >
         <div className='absolute left-4'>
           {loading ? (
-            <HugeiconsIcon size={20} icon={Loading03Icon} className='text-muted-foreground h-5 w-5 animate-spin' />
+            <HugeiconsIcon size={20} icon={Loading03Icon} className='h-5 w-5 animate-spin text-zinc-400 dark:text-zinc-300' />
           ) : (
-            <HugeiconsIcon size={20} icon={Search01Icon} className='text-muted-foreground h-5 w-5' />
+            <HugeiconsIcon size={20} icon={Search01Icon} className='h-5 w-5 text-zinc-400 dark:text-zinc-300' />
           )}
         </div>
         <Input
@@ -69,7 +74,7 @@ export function SearchBar() {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setFocused(true)}
-          className='placeholder:text-muted-foreground/60 h-11 flex-1 rounded-2xl border-0 bg-transparent pr-12 pl-12 focus-visible:ring-0 focus-visible:ring-offset-0'
+          className='h-11 flex-1 rounded-2xl border-0 bg-transparent pr-12 pl-12 text-zinc-900 placeholder:text-zinc-400 focus-visible:ring-0 focus-visible:ring-offset-0 dark:text-white dark:placeholder:text-zinc-400'
         />
         <AnimatePresence>
           {query && (
@@ -79,14 +84,15 @@ export function SearchBar() {
               exit={{ opacity: 0, scale: 0.8 }}
               className='absolute right-3'
             >
-              <Button variant='ghost' size='icon' onClick={clear} className='hover:bg-muted h-7 w-7 rounded-full'>
-                <HugeiconsIcon size={16} icon={Cancel01Icon} />
+              <Button variant='ghost' size='icon' onClick={clear} className='h-7 w-7 rounded-full hover:bg-zinc-200 dark:hover:bg-white/10'>
+                <HugeiconsIcon size={16} icon={Cancel01Icon} className='text-zinc-500 dark:text-zinc-300' />
               </Button>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
+      {/* Dropdown Results */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -94,26 +100,26 @@ export function SearchBar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.96 }}
             transition={{ duration: 0.15 }}
-            className='bg-background/95 border-border absolute z-50 mt-2 w-full overflow-hidden rounded-2xl border shadow-2xl backdrop-blur-xl'
+            className='absolute z-50 mt-2 w-full overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-white/10 dark:bg-zinc-900'
           >
             {!loading && results.length > 0 && (
-              <div className='border-border/50 border-b px-4 py-2'>
-                <p className='text-muted-foreground text-xs font-medium'>
+              <div className='border-b border-zinc-100 px-4 py-2 dark:border-white/10'>
+                <p className='text-xs font-medium text-zinc-400 dark:text-zinc-500'>
                   {results.length} {results.length === 1 ? 'result' : 'results'}
                 </p>
               </div>
             )}
 
-            <div className='[&::-webkit-scrollbar-thumb]:bg-muted-foreground/20 hover:[&::-webkit-scrollbar-thumb]:bg-muted-foreground/30 max-h-100 overflow-y-auto p-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border-2 [&::-webkit-scrollbar-thumb]:border-transparent [&::-webkit-scrollbar-track]:bg-transparent'>
+            <div className='max-h-100 overflow-y-auto p-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent'>
               {!loading && results.length > 0
                 ? results.map((p, i) => (
                     <motion.div key={p.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                       <Link
                         href={p.href}
-                        className='hover:bg-muted/50 group flex items-center gap-3 rounded-lg p-3 transition-all'
+                        className='group flex items-center gap-3 rounded-lg p-3 transition-all hover:bg-zinc-50 dark:hover:bg-white/5'
                         onClick={() => (setOpen(false), setFocused(false))}
                       >
-                        <div className='bg-muted hrink-0 ring-border/50 relative h-14 w-14 overflow-hidden rounded-lg ring-1'>
+                        <div className='relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-zinc-100 ring-1 ring-zinc-200 dark:bg-zinc-800 dark:ring-white/10'>
                           <Image
                             src={p.image ? sizedImage(p.image, 400) : '/placeholder.svg'}
                             alt={p.name}
@@ -124,7 +130,9 @@ export function SearchBar() {
                           />
                         </div>
                         <div className='min-w-0 flex-1'>
-                          <h6 className='group-hover:text-primary truncate text-sm font-medium transition-colors'>{p.name}</h6>
+                          <h6 className='group-hover:text-primary dark:group-hover:text-primary truncate text-sm font-medium text-zinc-800 transition-colors dark:text-zinc-100'>
+                            {p.name}
+                          </h6>
                           <p className='text-primary mt-0.5 text-sm font-semibold'>${p.price.toFixed(2)}</p>
                         </div>
                         <div className='opacity-0 transition-opacity group-hover:opacity-100'>
@@ -143,11 +151,11 @@ export function SearchBar() {
                       animate={{ opacity: 1 }}
                       className='flex flex-col items-center justify-center p-8 text-center'
                     >
-                      <div className='bg-muted mb-4 flex h-16 w-16 items-center justify-center rounded-full'>
-                        <HugeiconsIcon size={32} icon={ShoppingCartRemove02Icon} className='text-muted-foreground' />
+                      <div className='mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-white/10'>
+                        <HugeiconsIcon size={32} icon={ShoppingCartRemove02Icon} className='text-zinc-400 dark:text-zinc-500' />
                       </div>
-                      <h3 className='mb-1 text-base font-semibold'>No products found</h3>
-                      <p className='text-muted-foreground text-sm'>Try different keywords</p>
+                      <h3 className='mb-1 text-base font-semibold text-zinc-800 dark:text-zinc-100'>No products found</h3>
+                      <p className='text-sm text-zinc-400 dark:text-zinc-500'>Try different keywords</p>
                     </motion.div>
                   )}
             </div>

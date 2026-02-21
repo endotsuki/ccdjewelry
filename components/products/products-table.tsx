@@ -15,7 +15,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { ProductDialog } from '@/components/product-dialog';
+import { ProductDialog } from './product-dialog';
 import type { Product } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 import { sizedImage } from '@/lib/utils';
@@ -255,7 +255,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
                         size='default'
                         isActive={pg === page}
                         onClick={(e) => (e.preventDefault(), setPage(pg))}
-                        className='cursor-pointer'
+                        className='cursor-pointer border'
                       >
                         {pg}
                       </PaginationLink>

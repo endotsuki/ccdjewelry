@@ -50,7 +50,12 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
 
 function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink aria-label='Go to previous page' size='default' className={cn('gap-1 px-2.5 sm:pl-2.5', className)} {...props}>
+    <PaginationLink
+      aria-label='Go to previous page'
+      size='default'
+      className={cn('gap-1 border px-2.5 select-none sm:pl-2.5', className)}
+      {...props}
+    >
       <HugeiconsIcon size={20} icon={ArrowLeft01Icon} />
       <span className='hidden sm:block'>Previous</span>
     </PaginationLink>
@@ -59,7 +64,12 @@ function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof
 
 function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink aria-label='Go to next page' size='default' className={cn('gap-1 px-2.5 sm:pr-2.5', className)} {...props}>
+    <PaginationLink
+      aria-label='Go to next page'
+      size='default'
+      className={cn('gap-1 border px-2.5 select-none sm:pr-2.5', className)}
+      {...props}
+    >
       <span className='hidden sm:block'>Next</span>
       <HugeiconsIcon size={20} icon={ArrowRight01Icon} />
     </PaginationLink>
