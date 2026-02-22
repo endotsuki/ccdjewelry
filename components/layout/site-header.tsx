@@ -80,7 +80,7 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
                 href={item.href}
                 className='relative text-sm font-medium text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white'
               >
-                <p className='flex items-center gap-1.5 text-base'>
+                <p className='mb-2 flex items-center gap-2 text-base'>
                   <HugeiconsIcon size={20} icon={item.icon} />
                   {item.name}
                 </p>
