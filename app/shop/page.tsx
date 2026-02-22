@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import { SiteFooter } from '@/components/layout/site-footer';
 import { ProductGrid } from '@/components/products/product-grid';
 import { ProductFilters } from '@/components/products/product-filters';
 import { Skeleton } from '@/components/ui/skeleton';
+import { SiteHeader } from '@/components/layout/site-header';
 
 export const runtime = 'edge';
 

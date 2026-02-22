@@ -15,7 +15,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { ProductDialog } from '../products/product-dialog';
+import { ProductDialog } from '@/components/products/product-dialog';
 import type { Product } from '@/lib/types';
 import { useRouter } from 'next/navigation';
 import { sizedImage } from '@/lib/utils';

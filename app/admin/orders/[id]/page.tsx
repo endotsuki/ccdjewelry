@@ -2,13 +2,13 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { SiteHeader } from '@/components/site-header';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { createClient } from '@/lib/supabase/server';
 import { format } from 'date-fns';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft02Icon } from '@hugeicons/core-free-icons';
+import { SiteHeader } from '@/components/layout/site-header';
 
 export const runtime = 'edge';
 
@@ -52,11 +52,11 @@ export default async function OrderDetailPage({ params }: { params: Promise<{ id
     <div className='flex min-h-screen flex-col py-16'>
       <SiteHeader />
       <main className='container mx-auto flex-1 px-4 py-8'>
-        <div className='mb-6'>
+        <div className='my-8'>
           <Button variant='outline' asChild className='mb-4'>
             <Link href='/admin'>
               <HugeiconsIcon size={23} icon={ArrowLeft02Icon} className='mr-2 h-4 w-4' />
-              Back to Dashboard
+              Dashboard
             </Link>
           </Button>
         </div>

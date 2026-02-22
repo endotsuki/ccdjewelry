@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { OrdersTable } from '@/components/admin/orders-table';
-import { ProductsTable } from '@/components/admin/products-table';
-import { CategoryTable } from '@/components/admin/category-table';
-import { AdminSearch } from '@/components/admin/admin-search';
+import { OrdersTable } from '@/components/admin/orders/orders-table';
+import { ProductsTable } from '../products/products-table';
+import { CategoryTable } from '../categories/category-table';
+import { AdminSearch } from '@/components/admin/admin-search/admin-search';
 import type { Order, Product } from '@/lib/types';
-import type { Category } from '@/components/admin/category-table';
-import { AnimatedThemeToggler } from '@/components/animated-theme-toggler';
+import type { Category } from '../categories/category-table';
+import { AnimatedThemeToggler } from '@/components/shared/animated-theme-toggler';
 import { HugeiconsIcon } from '@hugeicons/react';
 import {
   ChartUpIcon,
@@ -21,6 +21,7 @@ import {
   ShoppingCart02Icon,
   UserGroupIcon,
 } from '@hugeicons/core-free-icons';
+import { motion } from 'motion/react';
 
 interface AdminDashboardProps {
   orders: Order[];
@@ -175,31 +176,20 @@ export function AdminDashboard({ orders, products, categories, totalOrders, tota
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={handleTabChange} className='w-full'>
-          <TabsList className='bg-muted/50 mb-6 gap-2'>
-            <TabsTrigger
-              value='orders'
-              id='tab-orders'
-              aria-controls='tab-orders-content'
-              className='data-[state=active]:bg-background data-[state=active]:shadow-sm'
-            >
-              Orders
-            </TabsTrigger>
-            <TabsTrigger
-              value='products'
-              id='tab-products'
-              aria-controls='tab-products-content'
-              className='data-[state=active]:bg-background data-[state=active]:shadow-sm'
-            >
-              Products
-            </TabsTrigger>
-            <TabsTrigger
-              value='categories'
-              id='tab-categories'
-              aria-controls='tab-categories-content'
-              className='data-[state=active]:bg-background data-[state=active]:shadow-sm'
-            >
-              Categories
-            </TabsTrigger>
+          <TabsList className='bg-muted/20 flex gap-2 rounded-lg p-1'>
+            {['orders', 'products', 'categories'].map((tab) => {
+              const isActive = activeTab === tab;
+
+              return (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className={`relative flex-1 rounded-lg px-4 py-2 text-center font-medium transition-all duration-300 ${isActive ? 'bg-primary scale-105 text-white shadow-lg' : 'text-muted-foreground hover:bg-muted/50'}`}
+                >
+                  {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                </TabsTrigger>
+              );
+            })}
           </TabsList>
 
           {/* Search */}

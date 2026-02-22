@@ -2,16 +2,16 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import { SiteFooter } from '@/components/layout/site-footer';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { createClient } from '@/lib/supabase/server';
 import { format } from 'date-fns';
-import OrderActions from '../../../components/order-actions';
+import OrderActions from '../../../components/cart/order-actions';
 import SetRecentOrder from '../../../components/set-recent-order';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft02Icon, Tick02Icon } from '@hugeicons/core-free-icons';
+import { SiteHeader } from '@/components/layout/site-header';
 
 export const runtime = 'edge';
 

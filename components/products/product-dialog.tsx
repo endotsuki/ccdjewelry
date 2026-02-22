@@ -12,7 +12,7 @@ import { Switch } from '@/components/ui/switch';
 import type { Product } from '@/lib/types';
 import { fixImageOrientation } from '@/lib/image-utils';
 import { useProductForm } from '@/hooks/useProductForm';
-import { ImagePreview } from '../image-preview';
+import { ImagePreview } from '../shared/image-preview';
 
 interface ProductDialogProps {
   product: Product | null;

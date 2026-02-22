@@ -13,12 +13,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination';
-import { CategoryDialog } from './category-dialog';
 import { useRouter } from 'next/navigation';
 import { sizedImage } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Edit04Icon, Delete01Icon, GeometricShapes01Icon, ArrowUpRight01Icon } from '@hugeicons/core-free-icons';
 import Link from 'next/link';
+import { CategoryDialog } from './category-dialog';
 
 export interface Category {
   id: string;

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/layout/site-header';
+import { SiteFooter } from '@/components/layout/site-footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { createClient } from '@/lib/supabase/server';
 import type { Category } from '@/lib/types';
@@ -24,7 +24,7 @@ export default async function CategoriesPage() {
       <SiteHeader />
       <main className='flex-1 pt-16'>
         <div className='container mx-auto px-4 py-8'>
-          <div className='mb-8'>
+          <div className='my-8'>
             <h1 className='mb-2 text-3xl font-bold md:text-4xl'>Shop by Category</h1>
             <p className='text-muted-foreground'>Explore our curated collections</p>
           </div>
@@ -40,14 +40,16 @@ export default async function CategoriesPage() {
                         alt={category.name}
                         fill
                         priority
-                        loading='eager'
                         style={{ objectFit: 'cover' }}
-                        className='transition-transform duration-300 group-hover:scale-105'
+                        className='transition-transform duration-500 group-hover:scale-110'
                       />
-                      <div className='absolute inset-0 flex items-end bg-linear-to-t from-black/60 to-transparent p-6'>
-                        <div>
-                          <h2 className='mb-2 text-2xl font-bold text-white'>{category.name}</h2>
-                          <p className='text-sm text-white/90'>{category.description}</p>
+                      <div className='absolute inset-0 flex items-end'>
+                        <div className='absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/70 via-black/40 to-transparent transition-all duration-300 group-hover:from-black/80 group-hover:via-black/60' />
+                        <div className='relative p-6'>
+                          <h2 className='text-2xl font-bold text-white'>{category.name}</h2>
+                          <p className='mt-2 translate-y-2 text-white/90 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100'>
+                            {category.description}
+                          </p>
                         </div>
                       </div>
                     </div>

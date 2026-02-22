@@ -13,8 +13,8 @@ import { useRouter } from 'next/navigation';
 import { sizedImage } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowLeft01Icon, ArrowRight01Icon, FavouriteIcon, Share08Icon, ShoppingCartAdd02Icon, StarIcon } from '@hugeicons/core-free-icons';
-import { QuantitySelector } from '../quantity-selector';
-import { ShareModal } from '../share-modal';
+import { QuantitySelector } from './quantity-selector';
+import { ShareModal } from '../shared/share-modal';
 import { ProductRow } from './product-row';
 
 interface ProductDetailsProps {

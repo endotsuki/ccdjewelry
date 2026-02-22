@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { MinusSignIcon, PlusSignIcon } from '@hugeicons/core-free-icons';
 

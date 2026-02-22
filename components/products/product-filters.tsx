@@ -27,18 +27,18 @@ export function ProductFilters() {
   const minQuery = Number(searchParams.get('min')) || MIN_PRICE;
   const maxQuery = Number(searchParams.get('max')) || MAX_PRICE;
 
-  const [price, setPrice] = useState<[number, number]>([minQuery, maxQuery]);
+  const [price, setPrice] = useState<[string, string]>([String(minQuery), String(maxQuery)]);
 
   useEffect(() => {
-    setPrice([minQuery, maxQuery]);
+    setPrice([String(minQuery), String(maxQuery)]);
   }, [minQuery, maxQuery]);
 
   const applyFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
 
     params.set('sort', currentSort);
-    params.set('min', String(price[0]));
-    params.set('max', String(price[1]));
+    params.set('min', String(Number(price[0]) || MIN_PRICE));
+    params.set('max', String(Number(price[1]) || MAX_PRICE));
 
     router.push(`/shop?${params.toString()}`);
   };
@@ -94,16 +94,17 @@ export function ProductFilters() {
               type='number'
               value={price[0]}
               min={MIN_PRICE}
-              max={price[1]}
-              onChange={(e) => setPrice([+e.target.value, price[1]])}
+              max={Number(price[1]) || MAX_PRICE}
+              onChange={(e) => setPrice([e.target.value, price[1]])}
               className='bg-background rounded-md border px-3 py-2 text-sm'
             />
+
             <input
               type='number'
               value={price[1]}
-              min={price[0]}
+              min={Number(price[0]) || MIN_PRICE}
               max={MAX_PRICE}
-              onChange={(e) => setPrice([price[0], +e.target.value])}
+              onChange={(e) => setPrice([price[0], e.target.value])}
               className='bg-background rounded-md border px-3 py-2 text-sm'
             />
           </div>

@@ -7,10 +7,10 @@ import { useState, useEffect } from 'react';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
-import { SearchBar } from './search-bar';
+import { SearchBar } from '../search-bar';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { useRouter } from 'next/navigation';
-import { AnimatedThemeToggler } from './animated-theme-toggler';
+import { AnimatedThemeToggler } from '../shared/animated-theme-toggler';
 import { useCartData } from '@/hooks/useCartData';
 import {
   CustomerSupportIcon,

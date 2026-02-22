@@ -102,17 +102,17 @@ export function HeroSlideshow({ products }: HeroSlideshowProps) {
         size='icon'
         variant='on-hold'
         onClick={() => setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)}
-        className='absolute top-1/2 left-2 z-10 h-8 w-8 -translate-y-1/2 rounded-full sm:left-4 sm:h-10 sm:w-10'
+        className='absolute top-1/2 z-10 h-8 w-8 translate-x-1/2 -translate-y-1/2 rounded-full sm:left-4 sm:h-12 sm:w-12'
       >
-        <HugeiconsIcon size={18} icon={ArrowLeft01Icon} />
+        <HugeiconsIcon size={23} icon={ArrowLeft01Icon} />
       </Button>
       <Button
         size='icon'
         variant='on-hold'
         onClick={() => setCurrentSlide((prev) => (prev + 1) % products.length)}
-        className='absolute top-1/2 right-2 z-10 h-8 w-8 -translate-y-1/2 rounded-full sm:right-4 sm:h-10 sm:w-10'
+        className='absolute top-1/2 z-10 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full sm:right-4 sm:h-12 sm:w-12'
       >
-        <HugeiconsIcon size={18} icon={ArrowRight01Icon} />
+        <HugeiconsIcon size={23} icon={ArrowRight01Icon} />
       </Button>
 
       {/* Slide Indicators */}

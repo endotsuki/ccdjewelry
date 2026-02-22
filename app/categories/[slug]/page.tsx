@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import { SiteHeader } from '@/components/site-header';
-import { SiteFooter } from '@/components/site-footer';
+import { SiteHeader } from '@/components/layout/site-header';
+import { SiteFooter } from '@/components/layout/site-footer';
 import { ProductGrid } from '@/components/products/product-grid';
 import { Skeleton } from '@/components/ui/skeleton';
 import { createClient } from '@/lib/supabase/server';
@@ -37,12 +37,13 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <>
+    <div className='flex min-h-screen flex-col'>
       <SiteHeader />
+
       <main className='flex-1 pt-16'>
         <div className='container mx-auto px-4 py-8'>
-          <div className='mb-8'>
-            <h1 className='mb-2 text-3xl font-bold md:text-4xl'>{category.name}</h1>
+          <div className='my-8'>
+            <h1 className='mb-5 text-3xl font-bold md:text-4xl'>{category.name}</h1>
             <p className='text-muted-foreground'>{category.description}</p>
           </div>
 
@@ -51,8 +52,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           </Suspense>
         </div>
       </main>
+
       <SiteFooter />
-    </>
+    </div>
   );
 }
 

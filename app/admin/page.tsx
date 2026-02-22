@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
-import { AdminDashboard } from '@/components/admin/admin-dashboard';
+import { AdminDashboard } from '@/components/admin/dashboard/admin-dashboard';
 
 export const runtime = 'edge';
 

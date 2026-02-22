@@ -1,4 +1,4 @@
-import { AdminLoginForm } from '@/components/admin/admin-login-form';
+import { AdminLoginForm } from '@/components/admin/auth/admin-login-form';
 import { BackgroundRippleEffect } from '@/components/ui/background-ripple-effect';
 import { Metadata } from 'next';
 

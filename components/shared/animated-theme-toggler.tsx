@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 
 import { cn } from '@/lib/utils';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { Moon02Icon, Sun01Icon } from '@hugeicons/core-free-icons';
 
