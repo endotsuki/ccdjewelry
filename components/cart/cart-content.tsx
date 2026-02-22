@@ -9,9 +9,9 @@ import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
 import type { CartItem } from '@/lib/types';
 import { sizedImage } from '@/lib/utils';
-import { QuantitySelector } from './quantity-selector';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { ArrowRight02Icon, Delete01Icon } from '@hugeicons/core-free-icons';
+import { QuantitySelector } from '../products/quantity-selector';
 
 export function CartContent() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);

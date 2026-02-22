@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SiteHeader } from '@/components/site-header';
 import { OrderSummaryCard } from '@/components/contact/OrderSummaryCard';
 import { ContactInfoForm } from '@/components/contact/ContactInfoForm';
 import { ContactInfoCards } from '@/components/contact/ContactInfoCards';
 import { ModeToggleButtons } from '@/components/contact/ModeToggleButtons';
 import { useCartData } from '@/hooks/useCartData';
 import { useContactForm } from '@/hooks/useContactForm';
+import { SiteHeader } from '@/components/layout/site-header';
 
 export const runtime = 'edge';
 
