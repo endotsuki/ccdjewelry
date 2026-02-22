@@ -59,32 +59,39 @@ export function ProductRow({ title, products }: ProductRowProps) {
             <Link key={product.id} href={`/products/${product.slug}`} className='min-w-56'>
               <Card className='group overflow-hidden transition-all hover:shadow-lg'>
                 <CardContent className='p-0'>
-                  <div className='relative aspect-square overflow-hidden'>
+                  <div className='relative aspect-4/5 overflow-hidden rounded-2xl'>
                     <Image
                       src={product.image_url ? sizedImage(product.image_url, 400) : '/placeholder.svg'}
                       alt={product.name}
                       fill
                       style={{ objectFit: 'cover' }}
-                      className='transition-transform group-hover:scale-105'
+                      className='transition-transform duration-700 ease-out group-hover:scale-110'
                     />
-                    {product.compare_at_price && (
-                      <Badge variant='discount' className='absolute top-3 left-3'>
+
+                    {/* Discount Badge */}
+                    {product.compare_at_price && Number(product.compare_at_price) > Number(product.price) && (
+                      <Badge variant='discount' className='absolute top-4 left-4 z-10'>
                         {Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)}% OFF
                       </Badge>
                     )}
-                  </div>
 
-                  <div className='p-3'>
-                    <h3 className='truncate font-medium'>{product.name}</h3>
+                    {/* Premium Bottom Gradient Overlay */}
+                    <div className='absolute inset-x-0 bottom-0 p-5'>
+                      <div className='absolute inset-0 rounded-2xl bg-linear-to-t from-black/95 via-black/60 to-transparent' />
 
-                    {product.compare_at_price && Number(product.compare_at_price) > Number(product.price) ? (
-                      <div className='flex items-center gap-3'>
-                        <h6 className='text-foreground text-sm font-semibold'>${Number(product.price).toFixed(2)}</h6>
-                        <h6 className='text-muted-foreground text-sm line-through'>${Number(product.compare_at_price).toFixed(2)}</h6>
+                      <div className='relative z-10 translate-y-4 pb-5 transition-all duration-500 ease-out group-hover:translate-y-0'>
+                        <h3 className='truncate text-base font-semibold tracking-tight text-white'>{product.name}</h3>
+
+                        {product.compare_at_price && Number(product.compare_at_price) > Number(product.price) ? (
+                          <div className='mt-1 flex items-center gap-3'>
+                            <span className='text-sm font-semibold text-white'>${Number(product.price).toFixed(2)}</span>
+                            <span className='text-sm text-white/60 line-through'>${Number(product.compare_at_price).toFixed(2)}</span>
+                          </div>
+                        ) : (
+                          <span className='mt-1 block text-sm text-white/80'>${Number(product.price).toFixed(2)}</span>
+                        )}
                       </div>
-                    ) : (
-                      <h6 className='text-muted-foreground text-sm'>${Number(product.price).toFixed(2)}</h6>
-                    )}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
