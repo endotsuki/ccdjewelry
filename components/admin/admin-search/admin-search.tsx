@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Cancel01Icon, Loading03Icon, Search01Icon } from '@hugeicons/core-free-icons';
+import { Cancel01Icon, DashedLineCircleIcon, Search01Icon } from '@hugeicons/core-free-icons';
 
 interface AdminSearchProps {
   onSearch: (q: string) => void;
@@ -38,7 +38,7 @@ export function AdminSearch({ onSearch, placeholder = 'Search orders or products
       <div className='relative flex items-center'>
         <div className='text-muted-foreground absolute top-1/2 left-3 -translate-y-1/2'>
           {loading ? (
-            <HugeiconsIcon size={23} icon={Loading03Icon} className='animate-spin' />
+            <HugeiconsIcon size={23} icon={DashedLineCircleIcon} className='text-primary animate-spin' />
           ) : (
             <HugeiconsIcon size={23} icon={Search01Icon} />
           )}
@@ -47,12 +47,16 @@ export function AdminSearch({ onSearch, placeholder = 'Search orders or products
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={placeholder}
-          className='h-11 rounded-full pr-10 pl-10'
+          className='h-11 rounded-full pr-11 pl-11'
         />
         {query && (
-          <div className='absolute top-1/2 right-2 -translate-y-1/2'>
-            <Button variant='ghost' size='icon' onClick={clear} className='h-9 w-9'>
-              <HugeiconsIcon icon={Cancel01Icon} size={16} />
+          <div className='absolute top-1/2 right-1 -translate-y-1/2'>
+            <Button variant='ghost' size='icon' onClick={clear} className='group h-9 w-9 hover:bg-transparent'>
+              <HugeiconsIcon
+                icon={Cancel01Icon}
+                size={20}
+                className='transition-all duration-300 group-hover:rotate-90 group-hover:text-red-400'
+              />
             </Button>
           </div>
         )}

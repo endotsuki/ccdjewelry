@@ -54,7 +54,7 @@ export function ProductRow({ title, products }: ProductRowProps) {
           <HugeiconsIcon size={20} icon={ArrowRight01Icon} />
         </Button>
 
-        <div ref={scrollRef} className='scrollbar-hide flex gap-4 overflow-x-auto pb-4'>
+        <div ref={scrollRef} className='scrollbar-hide flex gap-4 overflow-x-auto rounded-2xl pb-4'>
           {products.map((product) => (
             <Link key={product.id} href={`/products/${product.slug}`} className='min-w-56'>
               <Card className='group overflow-hidden transition-all hover:shadow-lg'>
