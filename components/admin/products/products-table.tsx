@@ -170,7 +170,7 @@ export function ProductsTable({ products }: ProductsTableProps) {
                     >
                       <div className='bg-muted relative h-12 w-12 overflow-hidden rounded-md'>
                         <Image
-                          src={p.image_url ? sizedImage(p.image_url, 48) : '/placeholder.svg'}
+                          src={p.image_url ? sizedImage(p.image_url) : '/placeholder.svg'}
                           alt={p.name}
                           fill
                           sizes='32'

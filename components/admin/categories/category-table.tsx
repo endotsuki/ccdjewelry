@@ -132,7 +132,7 @@ export function CategoryTable({ categories }: CategoryTableProps) {
                     >
                       <div className='bg-muted relative h-12 w-12 overflow-hidden rounded-md'>
                         <Image
-                          src={c.image_url ? sizedImage(c.image_url, 48) : '/placeholder.svg'}
+                          src={c.image_url ? sizedImage(c.image_url) : '/placeholder.svg'}
                           alt={c.name}
                           fill
                           sizes='32'

@@ -8,7 +8,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { sizedImage } from '@/lib/utils';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Cancel01Icon, Loading03Icon, Search01Icon, ShoppingCartRemove02Icon } from '@hugeicons/core-free-icons';
+import { ArrowUpRight01Icon, Cancel01Icon, Loading03Icon, Search01Icon, ShoppingCartRemove02Icon } from '@hugeicons/core-free-icons';
 
 interface Product {
   id: string;
@@ -110,18 +110,18 @@ export function SearchBar() {
               </div>
             )}
 
-            <div className='max-h-100 overflow-y-auto p-2 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent'>
+            <div className='max-h-100 overflow-y-auto p-1 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-zinc-200 dark:[&::-webkit-scrollbar-thumb]:bg-white/10 [&::-webkit-scrollbar-track]:bg-transparent'>
               {!loading && results.length > 0
                 ? results.map((p, i) => (
                     <motion.div key={p.id} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.03 }}>
                       <Link
                         href={p.href}
-                        className='group flex items-center gap-3 rounded-lg p-3 transition-all hover:bg-zinc-50 dark:hover:bg-white/5'
+                        className='group flex items-center gap-3 rounded-lg p-2 transition-all hover:bg-zinc-50 dark:hover:bg-white/5'
                         onClick={() => (setOpen(false), setFocused(false))}
                       >
                         <div className='relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-zinc-100 ring-1 ring-zinc-200 dark:bg-zinc-800 dark:ring-white/10'>
                           <Image
-                            src={p.image ? sizedImage(p.image, 400) : '/placeholder.svg'}
+                            src={p.image ? sizedImage(p.image) : '/placeholder.svg'}
                             alt={p.name}
                             width={56}
                             height={56}
@@ -137,9 +137,7 @@ export function SearchBar() {
                         </div>
                         <div className='opacity-0 transition-opacity group-hover:opacity-100'>
                           <div className='bg-primary/10 flex h-8 w-8 items-center justify-center rounded-full'>
-                            <svg className='text-primary h-4 w-4' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9 5l7 7-7 7' />
-                            </svg>
+                            <HugeiconsIcon size={16} icon={ArrowUpRight01Icon} className='text-primary' />
                           </div>
                         </div>
                       </Link>

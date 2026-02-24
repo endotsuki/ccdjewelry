@@ -61,7 +61,7 @@ export function ProductRow({ title, products }: ProductRowProps) {
                 <CardContent className='p-0'>
                   <div className='relative aspect-4/5 overflow-hidden rounded-2xl'>
                     <Image
-                      src={product.image_url ? sizedImage(product.image_url, 400) : '/placeholder.svg'}
+                      src={product.image_url ? sizedImage(product.image_url) : '/placeholder.svg'}
                       alt={product.name}
                       fill
                       style={{ objectFit: 'cover' }}
@@ -77,7 +77,7 @@ export function ProductRow({ title, products }: ProductRowProps) {
 
                     {/* Premium Bottom Gradient Overlay */}
                     <div className='absolute inset-x-0 bottom-0 p-5'>
-                      <div className='absolute inset-0 rounded-2xl bg-linear-to-t from-black/95 via-black/60 to-transparent' />
+                      <div className='absolute inset-0 bg-linear-to-t from-black/95 via-black/60 to-transparent' />
 
                       <div className='relative z-10 translate-y-4 pb-5 transition-all duration-500 ease-out group-hover:translate-y-0'>
                         <h3 className='truncate text-base font-semibold tracking-tight text-white'>{product.name}</h3>

@@ -36,7 +36,7 @@ export default async function CategoriesPage() {
                   <CardContent className='p-0'>
                     <div className='relative aspect-4/3 overflow-hidden'>
                       <Image
-                        src={category.image_url ? sizedImage(category.image_url, 400) : '/placeholder.svg'}
+                        src={category.image_url ? sizedImage(category.image_url) : '/placeholder.svg'}
                         alt={category.name}
                         fill
                         priority

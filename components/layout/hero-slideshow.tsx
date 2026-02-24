@@ -42,9 +42,9 @@ function Slide({ product, isActive }: { product: any; isActive: boolean }) {
             {product.compare_at_price && <h6 className='text-base text-white/60 line-through sm:text-xl'>${product.compare_at_price}</h6>}
           </div>
           <div className='flex flex-col gap-2 sm:flex-row sm:gap-4'>
-            <Button variant='on-hold' asChild size='sm' className='sm:h-11 sm:px-6 sm:text-base'>
+            <Button variant='on-hold' asChild size='sm' className='group sm:h-11 sm:px-6 sm:text-base'>
               <Link href={`/products/${product.slug}`}>
-                View Details <HugeiconsIcon size={18} icon={ArrowRight02Icon} className='ml-2' />
+                View Details <HugeiconsIcon size={23} icon={ArrowRight02Icon} className='transition-all duration-300 group-hover:ml-2' />
               </Link>
             </Button>
             <Button size='sm' className='sm:h-11 sm:px-6 sm:text-base' variant='secondary' asChild>

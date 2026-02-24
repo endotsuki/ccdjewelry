@@ -21,7 +21,6 @@ import {
   ShoppingCart02Icon,
   UserGroupIcon,
 } from '@hugeicons/core-free-icons';
-import { motion } from 'motion/react';
 
 interface AdminDashboardProps {
   orders: Order[];
@@ -162,14 +161,12 @@ export function AdminDashboard({ orders, products, categories, totalOrders, tota
 
           <Card className='py-4'>
             <CardHeader className='flex flex-row items-center justify-between pb-2'>
-              <CardTitle className='text-sm font-medium'>Customers</CardTitle>
+              <CardTitle className='text-sm font-medium'>Category</CardTitle>
               <HugeiconsIcon size={30} icon={UserGroupIcon} className='text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>
-                <h6>{new Set(orders.map((o) => o.customer_email)).size}</h6>
-              </div>
-              <p className='text-muted-foreground text-xs'>Unique customers</p>
+              <div className='text-2xl font-bold'>{categories.length}</div>
+              <p className='text-muted-foreground text-xs'>Active categories</p>
             </CardContent>
           </Card>
         </div>
