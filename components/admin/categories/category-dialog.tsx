@@ -32,20 +32,21 @@ const compressToWebP = async (file: File): Promise<Blob> => {
       const img = new window.Image();
       img.onload = () => {
         const canvas = document.createElement('canvas');
-        canvas.width = 1080;
-        canvas.height = 1080;
+        const TARGET_SIZE = 2000;
+        canvas.width = TARGET_SIZE;
+        canvas.height = TARGET_SIZE;
         const ctx = canvas.getContext('2d')!;
         const imgRatio = img.naturalWidth / img.naturalHeight;
-        let drawWidth = 1080,
-          drawHeight = 1080,
+        let drawWidth = TARGET_SIZE,
+          drawHeight = TARGET_SIZE,
           drawX = 0,
           drawY = 0;
         if (imgRatio > 1) {
-          drawWidth = 1080 * imgRatio;
-          drawX = -(drawWidth - 1080) / 2;
+          drawWidth = TARGET_SIZE * imgRatio;
+          drawX = -(drawWidth - TARGET_SIZE) / 2;
         } else {
-          drawHeight = 1080 / imgRatio;
-          drawY = -(drawHeight - 1080) / 2;
+          drawHeight = TARGET_SIZE / imgRatio;
+          drawY = -(drawHeight - TARGET_SIZE) / 2;
         }
         ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
         canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('Failed to convert image to WebP'))), 'image/webp', 0.8);
@@ -250,7 +251,7 @@ export function CategoryDialog({ category, open, onOpenChange }: CategoryDialogP
             )}
 
             <input ref={fileInputRef} type='file' accept='image/*' className='hidden' onChange={handleFileChange} />
-            <p className='text-muted-foreground text-xs'>Image will be compressed and converted to WebP (1080×1080).</p>
+            <p className='text-muted-foreground text-xs'>Image will be compressed and converted to WebP (2000x2000).</p>
           </div>
 
           {error && <p className='text-destructive text-sm'>{error}</p>}

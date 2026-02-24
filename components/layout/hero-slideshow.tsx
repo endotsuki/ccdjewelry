@@ -19,7 +19,7 @@ function Slide({ product, isActive }: { product: any; isActive: boolean }) {
     <div className={`absolute inset-0 transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'pointer-events-none opacity-0'}`}>
       <div className='absolute inset-0 m-2 overflow-hidden rounded-xl sm:m-5 sm:rounded-2xl'>
         <Image
-          src={product.image_url ? sizedImage(product.image_url, 1080) : '/placeholder.svg'}
+          src={product.image_url ? sizedImage(product.image_url) : '/placeholder.svg'}
           alt={product.name}
           fill
           style={{ objectFit: 'cover' }}
@@ -37,7 +37,7 @@ function Slide({ product, isActive }: { product: any; isActive: boolean }) {
           <p className='mb-4 line-clamp-3 max-w-xl text-sm text-white/90 sm:mb-6 sm:line-clamp-none sm:text-lg md:text-xl'>
             {product.description}
           </p>
-          <div className='mb-4 flex items-baseline gap-2 sm:mb-8 sm:gap-3'>
+          <div className='mb-4 flex gap-2 sm:mb-8 sm:gap-3'>
             <h6 className='text-2xl font-bold sm:text-4xl md:text-5xl'>${product.price}</h6>
             {product.compare_at_price && <h6 className='text-base text-white/60 line-through sm:text-xl'>${product.compare_at_price}</h6>}
           </div>

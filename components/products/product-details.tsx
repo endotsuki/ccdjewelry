@@ -16,6 +16,7 @@ import { ArrowLeft01Icon, ArrowRight01Icon, FavouriteIcon, Share08Icon, Shopping
 import { QuantitySelector } from './quantity-selector';
 import { ShareModal } from '../shared/share-modal';
 import { ProductRow } from './product-row';
+import { ImageZoom } from '../ui/image-zoom';
 
 interface ProductDetailsProps {
   product: Product & { category?: { name: string; id: string; slug: string } };
@@ -62,14 +63,9 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         title: 'Added to cart',
         description: `${product.name} has been added to your cart.`,
       });
-      // notify other components (header) to refresh cart immediately
       try {
         window.dispatchEvent(new CustomEvent('cart-updated'));
-      } catch {
-        // ignore if window not available
-      }
-      // keep the router refresh optional; header will update via event
-      // router.refresh()
+      } catch {}
     } catch {
       toast({
         title: 'Error',
@@ -110,13 +106,15 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <Card className='overflow-hidden rounded-3xl shadow-lg'>
             <CardContent className='p-0'>
               <div className='bg-muted relative aspect-square'>
-                <Image
-                  src={images[selectedImage] ? sizedImage(images[selectedImage], 1080) : '/placeholder.svg'}
-                  alt={product.name}
-                  fill
-                  priority
-                  className='rounded-xl object-cover'
-                />
+                <ImageZoom className='rounded-2xl'>
+                  <Image
+                    src={images[selectedImage] ? sizedImage(images[selectedImage]) : '/placeholder.svg'}
+                    alt={product.name}
+                    className='rounded-xl object-cover'
+                    width={2000}
+                    height={2000}
+                  />
+                </ImageZoom>
                 {product.compare_at_price && (
                   <Badge className='absolute top-3 left-3 border-0 bg-black px-2 py-1 text-xs text-white'>
                     {Math.round(((product.compare_at_price - product.price) / product.compare_at_price) * 100)}% OFF
@@ -149,7 +147,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
                       selectedImage === i ? 'border-primary/60' : 'hover:border-border border-transparent'
                     }`}
                   >
-                    <Image src={img ? sizedImage(img, 400) : '/placeholder.svg'} alt={product.name} fill className='object-cover' />
+                    <Image src={img ? sizedImage(img) : '/placeholder.svg'} alt={product.name} fill className='object-cover' />
                   </button>
                 ))}
               </div>
@@ -180,7 +178,7 @@ export function ProductDetails({ product }: ProductDetailsProps) {
               <span className='text-muted-foreground'>4.8 (127)</span>
             </div>
 
-            <div className='flex items-end gap-2 md:gap-4'>
+            <div className='flex gap-2 md:gap-4'>
               <h6 className='text-3xl font-bold md:text-4xl'>${product.price}</h6>
               {product.compare_at_price && (
                 <h6 className='text-muted-foreground text-lg line-through md:text-xl'>${product.compare_at_price}</h6>

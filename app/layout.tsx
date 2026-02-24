@@ -4,7 +4,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ccdjewelry.vercel.app/';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ccdjewelry.netlify.app/';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

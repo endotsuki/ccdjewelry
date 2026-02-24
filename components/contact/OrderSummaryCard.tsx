@@ -3,8 +3,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import type { CartItem } from '@/lib/types';
 import { sizedImage } from '@/lib/utils';
-import { HugeiconsIcon } from '@hugeicons/react';
-import { ShoppingBag02Icon } from '@hugeicons/core-free-icons';
 
 interface OrderSummaryCardProps {
   cartItems: CartItem[];
@@ -15,10 +13,7 @@ export function OrderSummaryCard({ cartItems, total }: OrderSummaryCardProps) {
   return (
     <Card className='border-primary/20 border-2'>
       <CardContent className='p-6'>
-        <h2 className='mb-6 flex items-center gap-2 text-2xl font-bold'>
-          <HugeiconsIcon size={30} icon={ShoppingBag02Icon} className='text-primary' />
-          Order Summary
-        </h2>
+        <h2 className='mb-6 flex items-center gap-2 text-2xl font-bold'>Order Summary</h2>
 
         <div className='space-y-4'>
           {cartItems.map((item, index) => (

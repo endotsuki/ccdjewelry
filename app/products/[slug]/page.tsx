@@ -19,14 +19,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   let productImageUrl: string;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ccdjewelry.vercel.app/';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ccdjewelry.netlify.app/';
 
   if (product.image_url && !product.image_url.includes('placeholder')) {
     if (product.image_url.startsWith('http')) {
       productImageUrl = product.image_url;
     } else {
-      const imageName = product.image_url.replace(/(_1080|_400|_48)?\.webp$/, '_1080.webp');
-      productImageUrl = `${siteUrl}/images/${imageName}`;
+      productImageUrl = product.image_url;
     }
   } else {
     productImageUrl = `${siteUrl}/icon.png`;

@@ -35,7 +35,7 @@ export function ProductDialog({ product, open, onOpenChange, isPreviewMode = fal
   }, []);
 
   /**
-   * Compresses and converts image to WebP format with fixed 1080x1080 dimensions
+   * Compresses and converts image to WebP format with fixed 2000 x 2000 dimensions
    * @param file - The image file to convert
    * @returns Promise resolving to a compressed WebP Blob
    */
@@ -46,28 +46,29 @@ export function ProductDialog({ product, open, onOpenChange, isPreviewMode = fal
         const img = new Image();
         img.onload = () => {
           const canvas = document.createElement('canvas');
-          // Set fixed dimensions to 1080x1080
-          canvas.width = 1080;
-          canvas.height = 1080;
+          // Set canvas to fixed 2000 x 2000 dimensions for consistent product image size
+          const TARGET_SIZE = 2000;
+          canvas.width = TARGET_SIZE;
+          canvas.height = TARGET_SIZE;
 
           const ctx = canvas.getContext('2d')!;
           const imgWidth = img.naturalWidth;
           const imgHeight = img.naturalHeight;
           const imgRatio = imgWidth / imgHeight;
-          const canvasRatio = 1; // 1080/1080 = 1
+          const canvasRatio = 1;
 
-          let drawWidth = 1080;
-          let drawHeight = 1080;
+          let drawWidth = TARGET_SIZE;
+          let drawHeight = TARGET_SIZE;
           let drawX = 0;
           let drawY = 0;
 
           // Calculate dimensions to fill canvas while maintaining aspect ratio (cover fit)
           if (imgRatio > canvasRatio) {
-            drawWidth = 1080 * (imgRatio / canvasRatio);
-            drawX = -(drawWidth - 1080) / 2;
+            drawWidth = TARGET_SIZE * (imgRatio / canvasRatio);
+            drawX = -(drawWidth - TARGET_SIZE) / 2;
           } else {
-            drawHeight = 1080 / (imgRatio / canvasRatio);
-            drawY = -(drawHeight - 1080) / 2;
+            drawHeight = TARGET_SIZE / (imgRatio / canvasRatio);
+            drawY = -(drawHeight - TARGET_SIZE) / 2;
           }
 
           ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
