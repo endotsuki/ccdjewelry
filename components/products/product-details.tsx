@@ -79,7 +79,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
 
   return (
     <div className='container mx-auto px-4 py-6 md:py-10'>
-      {/* Breadcrumb */}
       <nav className='text-muted-foreground mb-6 flex flex-wrap gap-1 text-xs sm:text-sm md:mb-8'>
         <Link href='/' className='hover:text-foreground'>
           Home
@@ -101,19 +100,12 @@ export function ProductDetails({ product }: ProductDetailsProps) {
       </nav>
 
       <div className='grid gap-6 md:gap-8 lg:grid-cols-2 lg:gap-12'>
-        {/* Image Gallery */}
         <div className='space-y-3 md:space-y-4'>
           <Card className='overflow-hidden rounded-3xl shadow-lg'>
             <CardContent className='p-0'>
               <div className='bg-muted relative aspect-square'>
                 <ImageZoom className='rounded-2xl'>
-                  <Image
-                    src={images[selectedImage] ? sizedImage(images[selectedImage]) : '/placeholder.svg'}
-                    alt={product.name}
-                    className='rounded-xl object-cover'
-                    width={2000}
-                    height={2000}
-                  />
+                  <Image src={sizedImage(images[selectedImage])} alt={product.name} width={2000} height={2000} sizes='2000px' />
                 </ImageZoom>
                 {product.compare_at_price && (
                   <Badge className='absolute top-3 left-3 border-0 bg-black px-2 py-1 text-xs text-white'>
@@ -163,12 +155,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           )}
         </div>
 
-        {/* Details */}
         <div className='space-y-4 md:space-y-6 lg:space-y-8'>
           <div>
             <h1 className='mb-2 text-2xl font-bold sm:text-3xl md:text-4xl'>{product.name}</h1>
 
-            {/* Compact Rating */}
             <div className='mb-3 flex items-center gap-2 text-sm'>
               <div className='flex'>
                 {[...Array(5)].map((_, i) => (
@@ -190,7 +180,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <p className='text-muted-foreground text-sm leading-relaxed md:text-base'>{product.description}</p>
           <Separator />
 
-          {/* Quantity & Actions */}
           <QuantitySelector quantity={quantity} onQuantityChange={setQuantity} stock={product.stock} />
 
           <div className='flex flex-wrap gap-3 md:gap-4'>
@@ -212,7 +201,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
         </div>
       </div>
 
-      {/* Related Products */}
       {relatedProducts.length > 0 && (
         <div className='mt-8 md:mt-12'>
           <ProductRow title='Related Products' products={relatedProducts} />

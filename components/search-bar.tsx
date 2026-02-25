@@ -55,7 +55,6 @@ export function SearchBar() {
 
   return (
     <div className='relative w-full max-w-md' ref={ref}>
-      {/* Search Input Wrapper — solid bg + visible border in both modes */}
       <div
         className={`relative flex items-center rounded-2xl border border-zinc-200 bg-zinc-100 transition-all dark:border-white/20 dark:bg-white/10 ${
           focused ? 'ring-primary/30 border-primary/50 dark:border-primary/50 ring-2' : 'hover:border-zinc-300 dark:hover:border-white/30'
