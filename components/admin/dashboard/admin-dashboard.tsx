@@ -19,7 +19,7 @@ import {
   Package03Icon,
   ShoppingBag02Icon,
   ShoppingCart02Icon,
-  UserGroupIcon,
+  GeometricShapes01Icon,
 } from '@hugeicons/core-free-icons';
 
 interface AdminDashboardProps {
@@ -162,7 +162,7 @@ export function AdminDashboard({ orders, products, categories, totalOrders, tota
           <Card className='py-4'>
             <CardHeader className='flex flex-row items-center justify-between pb-2'>
               <CardTitle className='text-sm font-medium'>Category</CardTitle>
-              <HugeiconsIcon size={30} icon={UserGroupIcon} className='text-muted-foreground' />
+              <HugeiconsIcon size={30} icon={GeometricShapes01Icon} className='text-muted-foreground' />
             </CardHeader>
             <CardContent>
               <div className='text-2xl font-bold'>{categories.length}</div>

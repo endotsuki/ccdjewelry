@@ -21,7 +21,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {/* Image Section */}
           <div className='relative aspect-4/5 overflow-hidden'>
             <Image
-              src={product.image_url ? sizedImage(product.image_url, 400) : '/placeholder.svg'}
+              src={product.image_url ? sizedImage(product.image_url) : '/placeholder.svg'}
               alt={product.name}
               fill
               style={{ objectFit: 'cover' }}
