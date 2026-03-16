@@ -59,7 +59,7 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 bg-white transition-all duration-300 dark:bg-zinc-900 ${
+      className={`fixed inset-x-0 top-0 z-50 bg-zinc-900/70 backdrop-blur-sm transition-all duration-300 ${
         scrolled
           ? 'border-b border-black/5 shadow-md shadow-black/10 dark:border-white/10 dark:shadow-black/40'
           : 'border-b border-transparent'

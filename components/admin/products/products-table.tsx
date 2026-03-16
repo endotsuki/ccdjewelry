@@ -7,6 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Switch } from '@/components/ui/switch';
 import {
   Pagination,
   PaginationContent,
@@ -36,6 +37,10 @@ export function ProductsTable({ products }: ProductsTableProps) {
   const [toDelete, setToDelete] = useState<Product | null>(null);
   const [page, setPage] = useState(1);
   const [slideshow, setSlideshow] = useState<Record<string, boolean>>({});
+  const [activeStatus, setActiveStatus] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(products.map((p) => [p.id, p.is_active]))
+  );
+  const [statusUpdating, setStatusUpdating] = useState<Record<string, boolean>>({});
 
   const perPage = 10;
   const sorted = [...products].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
@@ -76,6 +81,38 @@ export function ProductsTable({ products }: ProductsTableProps) {
       mounted = false;
     };
   }, []);
+
+  useEffect(() => {
+    setActiveStatus(Object.fromEntries(products.map((p) => [p.id, p.is_active])));
+  }, [products]);
+
+  const toggleActive = async (id: string, active: boolean) => {
+    const product = products.find((p) => p.id === id);
+    if (!product) return;
+
+    const prev = activeStatus[id];
+    setStatusUpdating((s) => ({ ...s, [id]: true }));
+    setActiveStatus((s) => ({ ...s, [id]: active }));
+
+    try {
+      const res = await fetch(`/api/products/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...product, is_active: active }),
+      });
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => null);
+        throw new Error(body?.error || body?.message || 'Failed to update product status');
+      }
+    } catch (e) {
+      console.error(e);
+      setActiveStatus((s) => ({ ...s, [id]: prev }));
+      alert(e instanceof Error ? e.message : 'Failed to update product status');
+    } finally {
+      setStatusUpdating((s) => ({ ...s, [id]: false }));
+    }
+  };
 
   const toggleSlideshow = async (id: string, add: boolean) => {
     try {
@@ -161,13 +198,17 @@ export function ProductsTable({ products }: ProductsTableProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paginated.map((p) => (
-                <TableRow key={p.id}>
-                  <TableCell>
-                    <div
-                      className='flex cursor-pointer items-center gap-3 transition-opacity hover:opacity-75'
-                      onClick={() => openDialog(p, true)}
-                    >
+              {paginated.map((p) => {
+                const isActive = activeStatus[p.id] ?? p.is_active;
+                const isUpdating = statusUpdating[p.id];
+
+                return (
+                  <TableRow key={p.id}>
+                    <TableCell>
+                      <div
+                        className='flex cursor-pointer items-center gap-3 transition-opacity hover:opacity-75'
+                        onClick={() => openDialog(p, true)}
+                      >
                       <div className='bg-muted relative h-12 w-12 overflow-hidden rounded-md'>
                         <Image
                           src={p.image_url ? sizedImage(p.image_url) : '/placeholder.svg'}
@@ -198,7 +239,12 @@ export function ProductsTable({ products }: ProductsTableProps) {
                     <Badge variant={p.stock > 10 ? 'outline' : p.stock > 0 ? 'in-active' : 'destructive'}>{p.stock} units</Badge>
                   </TableCell>
                   <TableCell>
-                    <Badge variant={p.is_active ? 'outline' : 'in-active'}>{p.is_active ? 'Active' : 'Inactive'}</Badge>
+                    <Switch
+                      checked={isActive}
+                      onCheckedChange={(checked) => toggleActive(p.id, checked)}
+                      disabled={previewMode || isUpdating}
+                      aria-label={isActive ? 'Set inactive' : 'Set active'}
+                    />
                   </TableCell>
                   <TableCell>
                     <div className='flex items-center justify-end gap-2'>
@@ -231,7 +277,8 @@ export function ProductsTable({ products }: ProductsTableProps) {
                     </div>
                   </TableCell>
                 </TableRow>
-              ))}
+                );
+              })}
             </TableBody>
           </Table>
           <div className='mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between'>
