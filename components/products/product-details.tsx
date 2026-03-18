@@ -177,7 +177,10 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           </div>
 
           <Separator />
-          <p className='text-muted-foreground text-sm leading-relaxed md:text-base'>{product.description}</p>
+          <div className='space-y-2'>
+            <h1 className='text-xl font-semibold md:text-xl'>Details:</h1>
+            <p className='text-muted-foreground text-sm leading-relaxed md:text-base'>{product.description}</p>
+          </div>
           <Separator />
 
           <QuantitySelector quantity={quantity} onQuantityChange={setQuantity} stock={product.stock} />
@@ -186,10 +189,6 @@ export function ProductDetails({ product }: ProductDetailsProps) {
             <Button variant='on-hold' onClick={handleAddToCart} disabled={product.stock === 0} className='h-12'>
               <HugeiconsIcon size={20} icon={ShoppingCartAdd02Icon} />
               Add to Cart
-            </Button>
-
-            <Button size='icon' variant='archived' className='h-12 w-12'>
-              <HugeiconsIcon size={23} icon={FavouriteIcon} className='text-red-500' />
             </Button>
 
             <Button variant='archived' size='icon' className='h-12 w-12' onClick={() => setShareOpen(true)}>

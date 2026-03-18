@@ -110,7 +110,7 @@ export function SiteHeader({ cartCount = 0 }: SiteHeaderProps) {
                 className='relative hidden h-9 w-9 sm:flex'
               >
                 <HugeiconsIcon size={20} icon={PackageProcessIcon} />
-                <Badge className='absolute -top-1 -right-1 h-3 w-3 items-center justify-center rounded-full bg-blue-500 p-0' />
+                <Badge className='absolute -top-1 -right-1 h-2.5 w-2.5 items-center justify-center rounded-full bg-blue-500 p-0' />
               </Button>
             )}
 
