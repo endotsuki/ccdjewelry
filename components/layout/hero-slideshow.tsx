@@ -102,7 +102,7 @@ export function HeroSlideshow({ products }: HeroSlideshowProps) {
         size='icon'
         variant='on-hold'
         onClick={() => setCurrentSlide((prev) => (prev - 1 + products.length) % products.length)}
-        className='absolute top-1/2 z-10 h-8 w-8 translate-x-1/2 -translate-y-1/2 rounded-full sm:left-4 sm:h-12 sm:w-12'
+        className='absolute top-1/2 left-3 z-10 h-9 w-9 -translate-y-1/2 rounded-full sm:left-4 sm:h-12 sm:w-12'
       >
         <HugeiconsIcon size={23} icon={ArrowLeft01Icon} />
       </Button>
@@ -110,7 +110,7 @@ export function HeroSlideshow({ products }: HeroSlideshowProps) {
         size='icon'
         variant='on-hold'
         onClick={() => setCurrentSlide((prev) => (prev + 1) % products.length)}
-        className='absolute top-1/2 z-10 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full sm:right-4 sm:h-12 sm:w-12'
+        className='absolute top-1/2 right-3 z-10 h-9 w-9 -translate-y-1/2 rounded-full sm:right-4 sm:h-12 sm:w-12'
       >
         <HugeiconsIcon size={23} icon={ArrowRight01Icon} />
       </Button>
